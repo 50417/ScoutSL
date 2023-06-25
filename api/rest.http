@@ -1,0 +1,7 @@
+###
+GET http://localhost:3001/v1/project/16
+Content-Type: application/json
+
+{
+    "date_type" : "2020-12-12"
+}
