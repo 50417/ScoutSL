@@ -263,7 +263,8 @@ export const ModelMetricOptions = ({
                 placement="left"
                 overlay={
                   <Tooltip id="button-tooltip-2">
-                    Block category. Refer to paper
+                    Hold Ctrl to deselect/multiselect . <br></br>Block category.
+                    Refer to paper
                   </Tooltip>
                 }
               >
