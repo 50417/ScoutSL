@@ -3,7 +3,15 @@ import "./footer.style.css";
 export const Footer = () => {
   return (
     <div className="text-center copy-right footnote">
-      &copy; SERC all right reserved - {new Date().getFullYear()}
+      &copy;
+      <a href="https://www.uta.edu/academics/schools-colleges/engineering/research/centers-and-labs/software-engineering-research-center">
+        SERC
+      </a>
+      {"&"}
+      <a href="https://www.inf.unibe.ch/about_us/team/software_engineering_group_seg/index_eng.html">
+        SEG
+      </a>{" "}
+      - {new Date().getFullYear()}
     </div>
   );
 };

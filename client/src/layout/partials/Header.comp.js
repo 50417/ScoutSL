@@ -24,7 +24,11 @@ export const Header = () => {
             <Modal.Header closeButton>
               <Modal.Title>About</Modal.Title>
             </Modal.Header>
-            <Modal.Body>SERC</Modal.Body>
+            <Modal.Body>
+              Joint work of Software Engineering Research Center, University of
+              Texas at Arlington and Software Engineering Group, University of
+              Bern
+            </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseAbout}>
                 Close
