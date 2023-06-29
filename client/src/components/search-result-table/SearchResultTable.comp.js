@@ -14,7 +14,7 @@ export const SearchResultTable = () => {
   }, [currentPage, searchInQueryResults, PageSize]);
 
   const downloadJson = (project_json_obj) => {
-    const { ["_id"]: dummy, ...tmpObject } = project_json_obj;
+    const { _id: dummy, ...tmpObject } = project_json_obj;
     const file_name = project_json_obj.project_id + ".json";
     var blob = new Blob([JSON.stringify(tmpObject, null, 3)], {
       type: "application/json",

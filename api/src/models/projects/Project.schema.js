@@ -86,6 +86,8 @@ const ProjectSchema = new Schema({
   models: [{}],
 });
 
+const collection = process.env.MONGO_COLLECTION || "test_v17";
+
 module.exports = {
-  ProjectSchema: mongoose.model("test_v15", ProjectSchema),
+  ProjectSchema: mongoose.model(collection, ProjectSchema, collection),
 };

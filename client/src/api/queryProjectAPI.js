@@ -1,9 +1,12 @@
 import axios from "axios";
+const API_URL = "http://localhost";
+const API_PORT = "4001";
+
 export const getProjects = (searchText) => {
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(
-        "http://localhost:3001/v1/project/" + searchText
+        API_URL + ":" + API_PORT + "/v1/project/" + searchText
       );
       resolve(result);
     } catch (error) {
@@ -17,7 +20,7 @@ export const getProjectsModelMetric = (advancedSearchText) => {
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(
-        "http://localhost:3001/v1/project/modelmetric",
+        API_URL + ":" + API_PORT + "/v1/project/modelmetric",
         {
           params,
         }
@@ -34,7 +37,7 @@ export const getProjectsCommitMetric = (advancedSearchText) => {
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(
-        "http://localhost:3001/v1/project/commitmetric",
+        API_URL + ":" + API_PORT + "/v1/project/commitmetric",
         {
           params,
         }
@@ -48,11 +51,11 @@ export const getProjectsCommitMetric = (advancedSearchText) => {
 
 export const getProjectsRepoAttribute = (advancedSearchText) => {
   const params = processSearchText(advancedSearchText);
-  console.log(params);
+  //console.log(params);
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(
-        "http://localhost:3001/v1/project/repoattribute",
+        API_URL + ":" + API_PORT + "/v1/project/repoattribute",
         {
           params,
         }

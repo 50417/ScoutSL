@@ -16,7 +16,7 @@ RUN npm install --silent
 # Bundle app source
 COPY . .
 
-EXPOSE 3001
+EXPOSE 4001
 
 #command executable and version
 CMD ["npm","start"]

@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const port = process.env.PORT || 3001;
+const port = process.env.API_PORT || 4001;
 
 //API sercurity
 app.use(helmet());
