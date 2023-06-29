@@ -124,6 +124,7 @@ export const ProjectCommitSearchOptions = ({
               type="text"
               value={advancedSearchText}
               onChange={handleAttributeChange}
+              disabled
               required
             />
           </Col>

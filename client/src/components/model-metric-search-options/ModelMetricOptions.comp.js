@@ -142,6 +142,7 @@ export const ModelMetricOptions = ({
               type="text"
               value={advancedSearchText}
               onChange={handleAttributeChange}
+              disabled
               required
             />
           </Col>

@@ -341,6 +341,7 @@ export const RepoAttributeSearchOptions = ({
               type="text"
               value={advancedSearchText}
               onChange={handleAttributeChange}
+              disabled
               required
             />
           </Col>

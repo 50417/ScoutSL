@@ -12,7 +12,11 @@ export const SearchResult = ({ fetchedSearchQuery }) => {
   if (isLoading) return <Spinner animation="border" variant="primary" />;
   if (error) return <Alert>{error}</Alert>;
   if (queryResults !== undefined && queryResults.length === 0)
-    return <Alert>NO RESULTS FOUND</Alert>;
+    return (
+      <Alert>
+        Sorry, we did not find a project matching your search criteria
+      </Alert>
+    );
   return (
     <>
       {" "}
