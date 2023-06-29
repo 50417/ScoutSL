@@ -26,6 +26,7 @@ const req_to_col_map = {
   modelRevision: "models.commits",
   perModelContributor: "models.contributors",
 };
+const result_limit = 300;
 const getProjectById = (project_id) => {
   return new Promise((resolve, reject) => {
     try {
@@ -44,7 +45,7 @@ const getProjectBySearchText = (searchText) => {
       ProjectSchema.find({
         project_description: { $regex: searchText, $options: "i" },
       })
-        .limit(2000)
+        .limit(result_limit)
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {
@@ -108,7 +109,7 @@ const getProjectByModelMetric = async (searchFilterObj) => {
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find(queryObj)
-        .limit(2000)
+        .limit(result_limit)
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {
@@ -142,7 +143,7 @@ const getProjectByCommitMetric = async (searchFilterObj) => {
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find(queryObj)
-        .limit(2000)
+        .limit(result_limit)
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {
@@ -184,7 +185,7 @@ const getProjectByRepoAttribute = async (searchFilterObj) => {
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find(queryObj)
-        .limit(2000)
+        .limit(result_limit)
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {

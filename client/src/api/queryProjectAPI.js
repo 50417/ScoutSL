@@ -1,13 +1,10 @@
 import axios from "axios";
-const API_URL = "http://localhost";
-const API_PORT = "4001";
+const API_URL = "http://localhost:4001";
 
 export const getProjects = (searchText) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get(
-        API_URL + ":" + API_PORT + "/v1/project/" + searchText
-      );
+      const result = await axios.get(API_URL + "/v1/project/" + searchText);
       resolve(result);
     } catch (error) {
       reject(error);
@@ -19,12 +16,9 @@ export const getProjectsModelMetric = (advancedSearchText) => {
   const params = processSearchText(advancedSearchText);
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get(
-        API_URL + ":" + API_PORT + "/v1/project/modelmetric",
-        {
-          params,
-        }
-      );
+      const result = await axios.get(API_URL + "/v1/project/modelmetric", {
+        params,
+      });
       resolve(result);
     } catch (error) {
       reject(error);
@@ -36,12 +30,9 @@ export const getProjectsCommitMetric = (advancedSearchText) => {
   const params = processSearchText(advancedSearchText);
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get(
-        API_URL + ":" + API_PORT + "/v1/project/commitmetric",
-        {
-          params,
-        }
-      );
+      const result = await axios.get(API_URL + "/v1/project/commitmetric", {
+        params,
+      });
       resolve(result);
     } catch (error) {
       reject(error);
@@ -54,12 +45,9 @@ export const getProjectsRepoAttribute = (advancedSearchText) => {
   //console.log(params);
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get(
-        API_URL + ":" + API_PORT + "/v1/project/repoattribute",
-        {
-          params,
-        }
-      );
+      const result = await axios.get(API_URL + "/v1/project/repoattribute", {
+        params,
+      });
       resolve(result);
     } catch (error) {
       reject(error);

@@ -6,7 +6,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const port = process.env.API_PORT || 4001;
-
+var mainRoute = "/v1/project";
 //API sercurity
 app.use(helmet());
 
@@ -28,8 +28,9 @@ if (process.env.NODE_ENV !== "production") {
   });
   //Logger
   app.use(morgan("tiny"));
+} else {
+  mainRoute = "/api/v1/project";
 }
-
 //Set body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -38,7 +39,7 @@ app.use(bodyParser.json());
 const projectRouter = require("./src/routers/project.router");
 
 // use routers
-app.use("/v1/project", projectRouter);
+app.use(mainRoute, projectRouter);
 
 //Error Handler
 const handleError = require("./src/utils/errorHandler");
