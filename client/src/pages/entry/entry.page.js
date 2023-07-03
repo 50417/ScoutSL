@@ -38,6 +38,10 @@ export const Entry = () => {
 
   const searchPageSwitcher = (searchPageType) => {
     setSearchPageLoad(searchPageType);
+    if (searchPageType === "basic") {
+      setSearchText("");
+      setFetchedSearchQuery("");
+    }
   };
   return (
     <Container>

@@ -1,6 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { Row, Col, Card, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Card,
+  Button,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { saveAs } from "file-saver";
 import Pagination from "../../pages/search-result/Pagination";
 export const SearchResultTable = () => {
@@ -22,6 +29,18 @@ export const SearchResultTable = () => {
 
     saveAs(blob, file_name);
   };
+
+  const downloadProject = (project_json_obj) => {
+    const git_url = "https://github.com";
+    const proj_url = project_json_obj.project_url;
+    if (proj_url.includes(git_url)) {
+      var download_link =
+        proj_url + "/archive/" + project_json_obj.version_sha + ".zip";
+      window.open(download_link, "_blank");
+    } else {
+      window.open(project_json_obj.download_link, "_blank");
+    }
+  };
   return (
     <>
       <Pagination
@@ -33,11 +52,21 @@ export const SearchResultTable = () => {
       />
       {searchInQueryResults.length ? (
         currentTableData.map((row) => (
-          <Card border="secondary" bg="light" text="dark" className="mb-2 mt-2">
+          <Card
+            border="secondary"
+            bg="light"
+            text="dark"
+            className="mb-2 mt-2"
+            key={row.projectid}
+          >
             <Row xs={1} md={2}>
               <Col xs={2} md={4} className="mb-4">
                 <Card.Text style={{ textAlign: "left" }}>
-                  <a href={row.project_url}>
+                  <a
+                    href={row.project_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <strong>{row.project_name}</strong>
                   </a>
                 </Card.Text>
@@ -62,15 +91,36 @@ export const SearchResultTable = () => {
               </Col>
               <Col xs={2} md={3} className="mb-1">
                 <Card.Text style={{ textAlign: "left" }}>
-                  Updated on: {row.updated_at.substring(0, 10)}
+                  Last update: {row.updated_at.substring(0, 10)}
                 </Card.Text>
               </Col>
-              <Col xs={2} md={3} className="mb-1">
+              <Col xs={1} md={2} className="mb-1">
                 <Card.Text style={{ textAlign: "left" }}>
                   Models: {row.no_of_model_files}
                 </Card.Text>
               </Col>
-              <Col xs={2} md={2} className="mb-1">
+              <Col xs={1} md={1} className="mb-1">
+                <Card.Text style={{ textAlign: "right" }}>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id="button-tooltip-2">
+                        if download fails, go to the project link
+                      </Tooltip>
+                    }
+                  >
+                    <Button
+                      name="button-downloadProject"
+                      variant="dark"
+                      onClick={() => downloadProject(row)}
+                      className="downloadButton"
+                    >
+                      Download
+                    </Button>
+                  </OverlayTrigger>
+                </Card.Text>
+              </Col>
+              <Col xs={1} md={2} className="mb-1">
                 <Card.Text style={{ textAlign: "right" }}>
                   <Button
                     name="button-downloadJson"
@@ -78,7 +128,7 @@ export const SearchResultTable = () => {
                     onClick={() => downloadJson(row)}
                     className=""
                   >
-                    Metadata
+                    JSON
                   </Button>
                 </Card.Text>
               </Col>
