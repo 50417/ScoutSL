@@ -105,7 +105,8 @@ export const SearchResultTable = () => {
                     placement="top"
                     overlay={
                       <Tooltip id="button-tooltip-2">
-                        if download fails, go to the project link
+                        if download fails or to get the latest version, go to
+                        the project link
                       </Tooltip>
                     }
                   >

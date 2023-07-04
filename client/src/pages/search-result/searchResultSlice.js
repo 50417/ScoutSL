@@ -28,9 +28,13 @@ const searchResultSlice = createSlice({
           return row;
         }
         if (row.project_description != null) {
-          return row.project_description
-            .toLowerCase()
-            .includes(payload.toLowerCase());
+          return (
+            row.project_description
+              .toLowerCase()
+              .includes(payload.toLowerCase()) ||
+            row.project_name.toLowerCase().includes(payload.toLowerCase()) ||
+            row.author_handle.toLowerCase().includes(payload.toLowerCase())
+          );
         }
         return false;
       });
