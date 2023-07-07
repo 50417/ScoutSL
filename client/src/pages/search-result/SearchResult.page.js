@@ -9,7 +9,13 @@ export const SearchResult = ({ fetchedSearchQuery }) => {
   const { queryResults, isLoading, error } = useSelector(
     (state) => state.queryResults
   );
-  if (isLoading) return <Spinner animation="border" variant="primary" />;
+  if (isLoading)
+    return (
+      <>
+        <span className="sr-only">Searching over 100k+ models...</span>
+        <Spinner animation="border" variant="primary"></Spinner>
+      </>
+    );
   if (error) return <Alert>{error}</Alert>;
   if (queryResults !== undefined && queryResults.length === 0)
     return (
