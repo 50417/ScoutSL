@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { AiFillQuestionCircle } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 export const ProjectCommitSearchOptions = ({
   handleOnSubmit,
@@ -17,6 +18,7 @@ export const ProjectCommitSearchOptions = ({
   numbers_re,
 }) => {
   //TODO: Refactor using object state and form name attribute later
+  const { isLoading } = useSelector((state) => state.queryResults);
   const [issue, setIssue] = useState("");
   const [pr, setPR] = useState("");
   const [commit, setCommit] = useState("");
@@ -129,7 +131,7 @@ export const ProjectCommitSearchOptions = ({
             />
           </Col>
           <Col sm={2}>
-            <Button variant="secondary" type="submit">
+            <Button variant="secondary" type="submit" disabled={isLoading}>
               Search
             </Button>
           </Col>

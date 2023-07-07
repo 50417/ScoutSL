@@ -61,7 +61,10 @@ export const SearchResultTable = () => {
           >
             <Row xs={1} md={2}>
               <Col xs={2} md={4} className="mb-4">
-                <Card.Text style={{ textAlign: "left" }}>
+                <Card.Text
+                  style={{ textAlign: "left" }}
+                  key={row.projectid + "Pname"}
+                >
                   <a
                     href={row.project_url}
                     target="_blank"
@@ -75,6 +78,7 @@ export const SearchResultTable = () => {
                 <Card.Text
                   style={{ textAlign: "left" }}
                   className="text-truncate"
+                  key={row.projectid + "Pdesc"}
                 >
                   {row.project_description}
                 </Card.Text>
@@ -85,22 +89,32 @@ export const SearchResultTable = () => {
                 <Card.Text
                   style={{ textAlign: "left" }}
                   className="text-truncate"
+                  key={row.projectid + "license"}
                 >
                   {row.license ? row.license : "No License"}
                 </Card.Text>
               </Col>
               <Col xs={2} md={3} className="mb-1">
-                <Card.Text style={{ textAlign: "left" }}>
+                <Card.Text
+                  style={{ textAlign: "left" }}
+                  key={row.projectid + "lastUpdate"}
+                >
                   Last update: {row.updated_at.substring(0, 10)}
                 </Card.Text>
               </Col>
               <Col xs={1} md={2} className="mb-1">
-                <Card.Text style={{ textAlign: "left" }}>
+                <Card.Text
+                  style={{ textAlign: "left" }}
+                  key={row.projectid + "numModels"}
+                >
                   Models: {row.no_of_model_files}
                 </Card.Text>
               </Col>
               <Col xs={1} md={1} className="mb-1">
-                <Card.Text style={{ textAlign: "right" }}>
+                <Card.Text
+                  style={{ textAlign: "right" }}
+                  key={row.projectid + "dbutton"}
+                >
                   <OverlayTrigger
                     placement="top"
                     overlay={
@@ -122,7 +136,10 @@ export const SearchResultTable = () => {
                 </Card.Text>
               </Col>
               <Col xs={1} md={2} className="mb-1">
-                <Card.Text style={{ textAlign: "right" }}>
+                <Card.Text
+                  style={{ textAlign: "right" }}
+                  key={row.projectid + "downloadJson"}
+                >
                   <Button
                     name="button-downloadJson"
                     variant="dark"

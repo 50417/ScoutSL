@@ -14,8 +14,11 @@ const searchResultSlice = createSlice({
       state.isLoading = true;
     },
     fetchResultSuccess: (state, action) => {
-      state.queryResults = action.payload;
-      state.searchInQueryResults = action.payload;
+      var res = action.payload;
+      console.log(res);
+      res.sort((a, b) => b.score - a.score);
+      state.queryResults = res;
+      state.searchInQueryResults = res;
       state.isLoading = false;
     },
     fetchResultFail: (state, { payload }) => {

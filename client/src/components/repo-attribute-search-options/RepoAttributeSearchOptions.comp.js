@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types"; // ES6
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import Select from "react-select";
+import { useSelector } from "react-redux";
 
 export const RepoAttributeSearchOptions = ({
   handleOnSubmit,
@@ -8,6 +10,7 @@ export const RepoAttributeSearchOptions = ({
   numbers_re,
   date_re,
 }) => {
+  const { isLoading } = useSelector((state) => state.queryResults);
   const [forks, setForks] = useState("");
   const [watchers, setWatchers] = useState("");
   const [stars, setStars] = useState("");
@@ -231,10 +234,19 @@ export const RepoAttributeSearchOptions = ({
     "sed",
     "xBase",
   ];
-  const handleAttributeChange = (e) => {
-    const value = e.target.value;
-    const attributeType = e.target.name;
-    //console.log();
+  var project_languages_map = [];
+  for (const s of project_languages) {
+    project_languages_map.push({ value: s.replace(/\s/g, ""), label: s });
+  }
+
+  const handleAttributeChange = (e, multiselectEvent) => {
+    var attributeType;
+    if (multiselectEvent && multiselectEvent.name === "languageAttribute") {
+      attributeType = multiselectEvent.name;
+    } else {
+      var value = e.target.value;
+      attributeType = e.target.name;
+    }
     switch (attributeType) {
       case "forksAttribute":
         if (numbers_re.test(value)) {
@@ -279,9 +291,7 @@ export const RepoAttributeSearchOptions = ({
         setlicense(selectedArr);
         break;
       case "languageAttribute":
-        var selectedLanguageArr = [].slice
-          .call(e.target.selectedOptions)
-          .map((item) => item.value);
+        var selectedLanguageArr = [].slice.call(e).map((item) => item.value);
         setLanguage(selectedLanguageArr);
         break;
       default:
@@ -299,13 +309,11 @@ export const RepoAttributeSearchOptions = ({
       (numSimModel.trim() !== "" ? " numSimModel:" + numSimModel : "") +
       (owners.trim() !== "" ? " owners:" + owners : "") +
       (searchQuery.trim() !== "" ? " searchQuery:" + searchQuery : "");
-    if (license.length > 0) {
-      console.log(license.length);
+    if (license.length > 0 && license[0] !== "") {
       tmpAdvancedSearchText =
         tmpAdvancedSearchText + " license:" + license.join(",");
     }
-    if (language.length > 0) {
-      console.log(language.length);
+    if (language.length > 0 && language[0] !== "") {
       tmpAdvancedSearchText =
         tmpAdvancedSearchText + " language:" + language.join(",");
     }
@@ -346,7 +354,7 @@ export const RepoAttributeSearchOptions = ({
             />
           </Col>
           <Col sm={2}>
-            <Button variant="secondary" type="submit">
+            <Button variant="secondary" type="submit" disabled={isLoading}>
               Search
             </Button>
           </Col>
@@ -480,22 +488,15 @@ export const RepoAttributeSearchOptions = ({
             <Form.Group className="mt-3" controlId="formHorizontal-1">
               <Form.Label>written in these languages</Form.Label>
 
-              <Form.Control
+              <Select
                 name="languageAttribute"
-                as="select"
-                multiple
-                value={language}
+                options={project_languages_map}
+                isMulti
+                closeMenuOnSelect={false}
                 onChange={handleAttributeChange}
-              >
-                {project_languages.map((project_language) => (
-                  <option
-                    key={project_language}
-                    value={project_language.replace(/\s/g, "")}
-                  >
-                    {project_language}
-                  </option>
-                ))}
-              </Form.Control>
+                allowSelectAll={true}
+                defaultValue={language}
+              />
             </Form.Group>
           </Col>
         </Row>

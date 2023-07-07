@@ -108,6 +108,7 @@ router.get("/repoattribute", queryRepoAttributeValidation, async (req, res) => {
 router.get("/:searchText", async (req, res) => {
   try {
     const { searchText } = req.params;
+
     const result = await getProjectBySearchText(searchText);
     return res.json({
       status: "success",
@@ -116,7 +117,6 @@ router.get("/:searchText", async (req, res) => {
   } catch (error) {
     res.json({ status: "error", message: error.message });
   }
-  next();
 });
 
 module.exports = router;

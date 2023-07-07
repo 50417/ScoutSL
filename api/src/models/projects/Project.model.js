@@ -26,11 +26,12 @@ const req_to_col_map = {
   modelRevision: "models.commits",
   perModelContributor: "models.contributors",
 };
-const result_limit = 300;
+const result_limit = 100000;
 const getProjectById = (project_id) => {
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find({ project_id })
+        .limit(result_limit)
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {
@@ -73,7 +74,7 @@ const get_num_range_query = (param, opt_param) => {
   return {};
 };
 
-const getProjectByModelMetric = async (searchFilterObj) => {
+const getProjectByModelMetric = (searchFilterObj) => {
   queryObj = {};
 
   req_keys = Object.keys(searchFilterObj);
@@ -118,15 +119,13 @@ const getProjectByModelMetric = async (searchFilterObj) => {
   });
 };
 
-const getProjectByCommitMetric = async (searchFilterObj) => {
+const getProjectByCommitMetric = (searchFilterObj) => {
   queryObj = {};
   const req_keys = Object.keys(searchFilterObj);
   const req_to_col_keys = Object.keys(req_to_col_map);
   for (let i = 0; i < req_keys.length; i++) {
     req_key = req_keys[i];
-    console.log(req_key);
     if (req_to_col_keys.includes(req_key)) {
-      console.log(req_key);
       if (req_keys.includes(req_key + "optional")) {
         queryObj[req_to_col_map[req_key]] = get_num_range_query(
           searchFilterObj[req_key],
@@ -137,9 +136,6 @@ const getProjectByCommitMetric = async (searchFilterObj) => {
       }
     }
   }
-  console.log(queryObj);
-  const res = await ProjectSchema.find(queryObj);
-  console.log(res.data);
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find(queryObj)
@@ -152,7 +148,7 @@ const getProjectByCommitMetric = async (searchFilterObj) => {
   });
 };
 
-const getProjectByRepoAttribute = async (searchFilterObj) => {
+const getProjectByRepoAttribute = (searchFilterObj) => {
   queryObj = {};
 
   const req_keys = Object.keys(searchFilterObj);
@@ -179,9 +175,6 @@ const getProjectByRepoAttribute = async (searchFilterObj) => {
       }
     }
   }
-  console.log(queryObj);
-  const res = ProjectSchema.find(queryObj);
-  console.log(res.data);
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find(queryObj)

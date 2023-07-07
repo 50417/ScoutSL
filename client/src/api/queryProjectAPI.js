@@ -117,14 +117,12 @@ const processSearchText = (searchText) => {
 
   const advancedRegex = /[^\s]+:[^\s]+/g;
   const advancedFilters = searchText.match(advancedRegex);
-  console.log(advancedFilters);
   for (let i = 0; i < advancedFilters.length; i++) {
     try {
       var [attr, first_param, last_param] = getOperandAndOperator(
         advancedFilters[i]
       );
     } catch (err) {
-      console.log(err);
       continue;
     }
     params[attr] = first_param;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types"; // ES6
+import Select from "react-select";
 import {
   Container,
   Row,
@@ -11,12 +12,14 @@ import {
 } from "react-bootstrap";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import "./modelMetricOptions.style.css";
+import { useSelector } from "react-redux";
 
 export const ModelMetricOptions = ({
   setSearchText,
   handleOnSubmit,
   numbers_re,
 }) => {
+  const { isLoading } = useSelector((state) => state.queryResults);
   const [blocks, setBlocks] = useState("");
   const [lines, setLines] = useState("");
   const [subsystems, setSubsystems] = useState("");
@@ -29,32 +32,37 @@ export const ModelMetricOptions = ({
 
   const [advancedSearchText, setAdvancedSearchText] = useState("");
 
-  const block_categories = [
-    "Conditional",
-    "Continuous",
-    "Custom",
-    "Discontinuities",
-    "Discrete",
-    "Documentation",
-    "Interface",
-    "Logic",
-    "Math",
-    "Matrix Operations",
-    "Messages & Events",
-    "Model Verification",
-    "Others",
-    "Signal Attributes",
-    "Signal Routing",
-    "Sinks",
-    "Sources",
-    "String",
-    "Structural",
-    "Trigger",
+  const block_categories_map = [
+    { value: "Conditional", label: "Conditional" },
+    { value: "Continuous", label: "Continuous" },
+    { value: "Custom", label: "Custom" },
+    { value: "Discontinuities", label: "Discontinuities" },
+    { value: "Discrete", label: "Discrete" },
+    { value: "Documentation", label: "Documentation" },
+    { value: "Interface", label: "Interface" },
+    { value: "Logic", label: "Logic" },
+    { value: "Math", label: "Math" },
+    { value: "Matrix Operations", label: "Matrix Operations" },
+    { value: "Messages & Events", label: "Messages & Events" },
+    { value: "Model Verification", label: "Model Verification" },
+    { value: "Others", label: "Others" },
+    { value: "Signal Attributes", label: "Signal Attributes" },
+    { value: "Signal Routing", label: "Signal Routing" },
+    { value: "Sinks", label: "Sinks" },
+    { value: "Sources", label: "Sources" },
+    { value: "String", label: "String" },
+    { value: "Structural", label: "Structural" },
+    { value: "Trigger", label: "Trigger" },
   ];
 
-  const handleAttributeChange = (e) => {
-    const value = e.target.value;
-    const attributeType = e.target.name;
+  const handleAttributeChange = (e, multiselectEvent) => {
+    var attributeType;
+    if (multiselectEvent && multiselectEvent.name === "blockTypeAttribute") {
+      attributeType = multiselectEvent.name;
+    } else {
+      var value = e.target.value;
+      attributeType = e.target.name;
+    }
 
     switch (attributeType) {
       case "blockAttribute":
@@ -84,9 +92,7 @@ export const ModelMetricOptions = ({
         setSimMode(value);
         break;
       case "blockTypeAttribute":
-        var selectedBlockTypesArr = [].slice
-          .call(e.target.selectedOptions)
-          .map((item) => item.value);
+        var selectedBlockTypesArr = [].slice.call(e).map((item) => item.value);
         setBlockTypes(selectedBlockTypesArr);
         break;
       case "includeLibCount":
@@ -110,7 +116,7 @@ export const ModelMetricOptions = ({
       (simMode.trim() !== "" ? " simMode:" + simMode : "") +
       (codeGen.trim() !== "" ? " codeGen:" + codeGen : "") +
       (includeLibCount ? " inc_lib:true" : "");
-    if (blockTypes.length > 0) {
+    if (blockTypes.length > 0 && blockTypes !== "") {
       tmpAdvancedSearchText =
         tmpAdvancedSearchText + " blocktypes:" + blockTypes.join(",");
     }
@@ -160,7 +166,7 @@ export const ModelMetricOptions = ({
             </Form.Group>
           </Col>
           <Col sm={1}>
-            <Button variant="secondary" type="submit">
+            <Button variant="secondary" type="submit" disabled={isLoading}>
               Search
             </Button>
           </Col>
@@ -275,19 +281,15 @@ export const ModelMetricOptions = ({
                 </Form.Label>
               </OverlayTrigger>
 
-              <Form.Control
+              <Select
                 name="blockTypeAttribute"
-                as="select"
-                multiple
-                value={blockTypes}
+                options={block_categories_map}
+                isMulti
+                closeMenuOnSelect={false}
                 onChange={handleAttributeChange}
-              >
-                {block_categories.map((block_category) => (
-                  <option key={block_category} value={block_category}>
-                    {block_category}
-                  </option>
-                ))}
-              </Form.Control>
+                allowSelectAll={true}
+                defaultValue={blockTypes}
+              />
             </Form.Group>
           </Col>
           <Col lg={3}>

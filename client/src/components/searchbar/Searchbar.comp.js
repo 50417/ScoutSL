@@ -2,13 +2,14 @@ import React from "react";
 import PropTypes from "prop-types"; // ES6
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "./searchbar.style.css";
-
+import { useSelector } from "react-redux";
 export const Searchbar = ({
   handleOnChange,
   handleOnSubmit,
   searchPageSwitcher,
   searchText,
 }) => {
+  const { isLoading } = useSelector((state) => state.queryResults);
   return (
     <Container>
       <Row>
@@ -32,7 +33,7 @@ export const Searchbar = ({
                 </Form.Group>
               </Col>
               <Col>
-                <Button variant="secondary" type="submit">
+                <Button variant="secondary" type="submit" disabled={isLoading}>
                   Search
                 </Button>
               </Col>
