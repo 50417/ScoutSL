@@ -20,8 +20,7 @@ export const SearchResult = ({ fetchedSearchQuery }) => {
     //console.log(error);
     return (
       <Alert>
-        Oops! Something went wrong with your input. Please double-check and try
-        again
+        Oops! Something went wrong with your input. Check Help and try again
       </Alert>
     );
   }
