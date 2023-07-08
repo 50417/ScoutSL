@@ -15,7 +15,7 @@ const searchResultSlice = createSlice({
     },
     fetchResultSuccess: (state, action) => {
       var res = action.payload;
-      console.log(res);
+      //console.log(res);
       res.sort((a, b) => b.score - a.score);
       state.queryResults = res;
       state.searchInQueryResults = res;
@@ -35,8 +35,8 @@ const searchResultSlice = createSlice({
             row.project_description
               .toLowerCase()
               .includes(payload.toLowerCase()) ||
-            row.project_name.toLowerCase().includes(payload.toLowerCase()) ||
-            row.author_handle.toLowerCase().includes(payload.toLowerCase())
+            row.project_name.toLowerCase().includes(payload.toLowerCase())
+            //|| row.author_handle.toLowerCase().includes(payload.toLowerCase())
           );
         }
         return false;
