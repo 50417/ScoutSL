@@ -46,6 +46,9 @@ const getProjectBySearchText = (searchText) => {
       ProjectSchema.find({
         project_description: { $regex: searchText, $options: "i" },
       })
+        .select(
+          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
+        )
         .limit(result_limit)
         .then((data) => resolve(data))
         .catch((error) => reject(error));
@@ -110,6 +113,9 @@ const getProjectByModelMetric = (searchFilterObj) => {
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find(queryObj)
+        .select(
+          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
+        )
         .limit(result_limit)
         .then((data) => resolve(data))
         .catch((error) => reject(error));
@@ -139,6 +145,9 @@ const getProjectByCommitMetric = (searchFilterObj) => {
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find(queryObj)
+        .select(
+          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
+        )
         .limit(result_limit)
         .then((data) => resolve(data))
         .catch((error) => reject(error));
@@ -178,6 +187,9 @@ const getProjectByRepoAttribute = (searchFilterObj) => {
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find(queryObj)
+        .select(
+          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
+        )
         .limit(result_limit)
         .then((data) => resolve(data))
         .catch((error) => reject(error));
