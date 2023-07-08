@@ -16,7 +16,15 @@ export const SearchResult = ({ fetchedSearchQuery }) => {
         <Spinner animation="border" variant="primary"></Spinner>
       </>
     );
-  if (error) return <Alert>{error}</Alert>;
+  if (error) {
+    //console.log(error);
+    return (
+      <Alert>
+        Oops! Something went wrong with your input. Please double-check and try
+        again
+      </Alert>
+    );
+  }
   if (queryResults !== undefined && queryResults.length === 0)
     return (
       <Alert>
