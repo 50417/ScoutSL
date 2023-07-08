@@ -11,7 +11,7 @@ import {
   searchQueryResults,
 } from "./searchResultSlice";
 export const fetchSearchResult =
-  (searchText, searchPageType) => async (dispatch) => {
+  (searchText, searchPageType, pageSize, pageNo) => async (dispatch) => {
     dispatch(fetchResultLoading());
     var result;
     try {
@@ -23,9 +23,9 @@ export const fetchSearchResult =
       } else if (searchPageType === "repoAttribute") {
         result = await getProjectsRepoAttribute(searchText);
       } else {
-        result = await getProjects(searchText);
+        result = await getProjects(searchText, pageSize, pageNo);
       }
-      dispatch(fetchResultSuccess(result.data.result));
+      dispatch(fetchResultSuccess(result.data));
     } catch (error) {
       dispatch(fetchResultFail(error.message));
     }

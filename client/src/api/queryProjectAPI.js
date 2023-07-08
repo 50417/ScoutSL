@@ -1,10 +1,17 @@
 import axios from "axios";
 const API_URL = "http://localhost:4001";
 
-export const getProjects = (searchText) => {
+export const getProjects = (searchText, howManyItems, whichPage) => {
+  var params = {
+    pageSize: howManyItems,
+    page: whichPage,
+  };
+  console.log(params);
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get(API_URL + "/v1/project/" + searchText);
+      const result = await axios.get(API_URL + "/v1/project/" + searchText, {
+        params,
+      });
       resolve(result);
     } catch (error) {
       reject(error);
@@ -14,6 +21,7 @@ export const getProjects = (searchText) => {
 
 export const getProjectsModelMetric = (advancedSearchText) => {
   const params = processSearchText(advancedSearchText);
+  console.log(params);
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(API_URL + "/v1/project/modelmetric", {

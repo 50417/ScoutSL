@@ -5,6 +5,9 @@ const initialState = {
   isLoading: false,
   error: "",
   searchInQueryResults: [],
+  searchQuery: "",
+  totalSearchResults: 0,
+  searchPageType: "",
 };
 const searchResultSlice = createSlice({
   name: "queryResult",
@@ -14,12 +17,15 @@ const searchResultSlice = createSlice({
       state.isLoading = true;
     },
     fetchResultSuccess: (state, action) => {
-      var res = action.payload;
-      console.log(res);
-      res.sort((a, b) => b.score - a.score);
+      var res = action.payload.result;
+      //console.log(res);
+      //res.sort((a, b) => b.score - a.score);
       state.queryResults = res;
       state.searchInQueryResults = res;
       state.isLoading = false;
+      state.totalSearchResults = action.payload.total_results;
+      state.searchQuery = action.payload.searchQuery;
+      state.searchPageType = action.payload.searchPageType;
     },
     fetchResultFail: (state, { payload }) => {
       state.isLoading = false;

@@ -26,7 +26,7 @@ const req_to_col_map = {
   modelRevision: "models.commits",
   perModelContributor: "models.contributors",
 };
-const result_limit = 100000;
+const result_limit = 50;
 const getProjectById = (project_id) => {
   return new Promise((resolve, reject) => {
     try {
@@ -40,13 +40,29 @@ const getProjectById = (project_id) => {
   });
 };
 
-const getProjectBySearchText = (searchText) => {
+const getProjectBySearchText = (searchText, pageSize, page) => {
   return new Promise((resolve, reject) => {
     try {
       ProjectSchema.find({
         project_description: { $regex: searchText, $options: "i" },
       })
-        .limit(result_limit)
+        .sort({ score: -1 })
+        .limit(pageSize)
+        .skip(pageSize * page)
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const getProjectBySearchTextCount = (searchText) => {
+  return new Promise((resolve, reject) => {
+    try {
+      ProjectSchema.countDocuments({
+        project_description: { $regex: searchText, $options: "i" },
+      })
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {
@@ -189,6 +205,7 @@ const getProjectByRepoAttribute = (searchFilterObj) => {
 module.exports = {
   getProjectById,
   getProjectBySearchText,
+  getProjectBySearchTextCount,
   getProjectByModelMetric,
   getProjectByCommitMetric,
   getProjectByRepoAttribute,

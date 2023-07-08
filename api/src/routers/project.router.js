@@ -5,6 +5,7 @@ const {
   getProjectByModelMetric,
   getProjectByCommitMetric,
   getProjectByRepoAttribute,
+  getProjectBySearchTextCount,
 } = require("../models/projects/Project.model");
 const numeric_types = new Set([
   "blocks",
@@ -108,10 +109,15 @@ router.get("/repoattribute", queryRepoAttributeValidation, async (req, res) => {
 router.get("/:searchText", async (req, res) => {
   try {
     const { searchText } = req.params;
-
-    const result = await getProjectBySearchText(searchText);
+    const pageSize = Number(req.query["pageSize"]);
+    const page = Number(req.query["page"]);
+    const count_res = await getProjectBySearchTextCount(searchText);
+    const result = await getProjectBySearchText(searchText, pageSize, page);
     return res.json({
       status: "success",
+      total_results: count_res,
+      searchQuery: searchText,
+      searchPageType: "simpleSearch",
       result,
     });
   } catch (error) {

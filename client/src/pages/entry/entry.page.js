@@ -33,7 +33,7 @@ export const Entry = () => {
       return alert("Fill up the form");
     }
     setFetchedSearchQuery(searchText);
-    dispatch(fetchSearchResult(searchText, searchPageType));
+    dispatch(fetchSearchResult(searchText, searchPageType, 10, 0));
   };
 
   const searchPageSwitcher = (searchPageType) => {

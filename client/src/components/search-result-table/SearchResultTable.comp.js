@@ -9,9 +9,17 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { saveAs } from "file-saver";
+import { useDispatch } from "react-redux";
 import Pagination from "../../pages/search-result/Pagination";
+import { fetchSearchResult } from "../../pages/search-result/searchResultAction";
 export const SearchResultTable = () => {
-  const { searchInQueryResults } = useSelector((state) => state.queryResults);
+  const dispatch = useDispatch();
+  const {
+    searchInQueryResults,
+    totalSearchResults,
+    searchQuery,
+    searchPageType,
+  } = useSelector((state) => state.queryResults);
   const [currentPage, setCurrentPage] = useState(1);
   let PageSize = 10;
   const currentTableData = useMemo(() => {
@@ -19,6 +27,12 @@ export const SearchResultTable = () => {
     const lastPageIndex = firstPageIndex + PageSize;
     return searchInQueryResults.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, searchInQueryResults, PageSize]);
+
+  const retrieveResultsAndChangePage = (page) => {
+    console.log(page);
+    setCurrentPage(page);
+    dispatch(fetchSearchResult(searchQuery, searchPageType, PageSize, page));
+  };
 
   const downloadJson = (project_json_obj) => {
     const { _id: dummy, ...tmpObject } = project_json_obj;
@@ -46,9 +60,9 @@ export const SearchResultTable = () => {
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}
-        totalCount={searchInQueryResults.length}
+        totalCount={totalSearchResults}
         pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
+        onPageChange={(page) => retrieveResultsAndChangePage(page)}
       />
       {searchInQueryResults.length ? (
         currentTableData.map((row) => (
@@ -163,9 +177,9 @@ export const SearchResultTable = () => {
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}
-        totalCount={searchInQueryResults.length}
+        totalCount={totalSearchResults}
         pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
+        onPageChange={(page) => retrieveResultsAndChangePage(page)}
       />
     </>
   );
