@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Container, Row, Button, Modal, Col } from "react-bootstrap";
+import "./header.style.css";
 export const Header = () => {
   const [showCitation, setShowCitation] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   const handleCloseCitation = () => setShowCitation(false);
   const handleShowCitation = () => setShowCitation(true);
 
   const handleCloseAbout = () => setShowAbout(false);
   const handleShowAbout = () => setShowAbout(true);
+
+  const handleCloseHelp = () => setShowHelp(false);
+  const handleShowHelp = () => setShowHelp(true);
 
   const bibtex =
     "@inproceedings{XX,\nauthor    = {XX}, \ntitle     = {XX},\nbooktitle = {XX},\npages     = {XX},\npublisher = {{XX}},\nyear      = {XX}}";
@@ -33,8 +38,74 @@ export const Header = () => {
               <Button variant="secondary" onClick={handleCloseAbout}>
                 Close
               </Button>
-              <Button variant="primary" onClick={handleCloseAbout}>
+              <Button variant="primary" onClick={handleCloseHelp}>
                 Copy
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </Col>
+
+        <Col style={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="light" onClick={handleShowHelp}>
+            Help
+          </Button>
+
+          <Modal show={showHelp} onHide={handleCloseHelp}>
+            <Modal.Header closeButton>
+              <Modal.Title>Supported Query Format</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <h4>Date Attributes</h4>
+              <table stripped bordered hover variant="dark" size="xxl">
+                <tr>
+                  <th>Query </th>
+                  <th>Find projects </th>
+                </tr>
+                <tr>
+                  <td style={{ width: "50%" }}>2020-01-01..2022-01-01</td>
+                  <td style={{ width: "50%" }}>
+                    created between Jan 1st 2020 and Jan 1st 2022
+                    (non-inclusive)
+                  </td>
+                </tr>
+                <tr>
+                  <td>&lt;2020-01-01</td>
+                  <td>created before Jan 1st 2020</td>
+                </tr>
+                <tr>
+                  <td>&gt;2020-01-01</td>
+                  <td>created after Jan 1st 2020</td>
+                </tr>
+              </table>
+              <br></br>
+              <br></br>
+              <h4>Numeric Attributes</h4>
+              <table stripped bordered hover variant="dark" size="xxl">
+                <tr>
+                  <th>Query </th>
+                  <th>Find model with blocks </th>
+                </tr>
+                <tr>
+                  <td style={{ width: "55%" }}>10..200</td>
+                  <td style={{ width: "50%" }}> between 10 and 200</td>
+                </tr>
+                <tr>
+                  <td>&lt;200</td>
+                  <td>less than 200</td>
+                </tr>
+                <tr>
+                  <td>&gt;10 </td>
+                  <td>greater than 10</td>
+                </tr>
+                <tr>
+                  <td>10 </td>
+                  <td>equal to 10</td>
+                </tr>
+              </table>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseHelp}>
+                Close
               </Button>
             </Modal.Footer>
           </Modal>
