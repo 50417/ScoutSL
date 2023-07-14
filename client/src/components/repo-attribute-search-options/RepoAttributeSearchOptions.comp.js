@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types"; // ES6
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
+import { AiFillQuestionCircle } from "react-icons/ai";
 import Select from "react-select";
 import { useSelector } from "react-redux";
 
@@ -24,6 +33,9 @@ export const RepoAttributeSearchOptions = ({
 
   const [language, setLanguage] = useState([]);
   const [license, setlicense] = useState("");
+
+  const [numOfRating, setNumOfRating] = useState("");
+  const [avgRating, setAvgRating] = useState("");
 
   const [advancedSearchText, setAdvancedSearchText] = useState("");
 
@@ -248,6 +260,16 @@ export const RepoAttributeSearchOptions = ({
       attributeType = e.target.name;
     }
     switch (attributeType) {
+      case "avgRatingAttribute":
+        if (numbers_re.test(value)) {
+          setAvgRating(value);
+        }
+        break;
+      case "numRatingAttribute":
+        if (numbers_re.test(value)) {
+          setNumOfRating(value);
+        }
+        break;
       case "forksAttribute":
         if (numbers_re.test(value)) {
           setForks(value);
@@ -308,7 +330,9 @@ export const RepoAttributeSearchOptions = ({
       (pushedDate.trim() !== "" ? " pushedDate:" + pushedDate : "") +
       (numSimModel.trim() !== "" ? " numSimModel:" + numSimModel : "") +
       (owners.trim() !== "" ? " owners:" + owners : "") +
-      (searchQuery.trim() !== "" ? " searchQuery:" + searchQuery : "");
+      (searchQuery.trim() !== "" ? " searchQuery:" + searchQuery : "") +
+      (numOfRating.trim() !== "" ? " numOfRating:" + numOfRating : "") +
+      (avgRating.trim() !== "" ? " setAvgRating:" + avgRating : "");
     if (license.length > 0 && license[0] !== "") {
       tmpAdvancedSearchText =
         tmpAdvancedSearchText + " license:" + license.join(",");
@@ -331,6 +355,8 @@ export const RepoAttributeSearchOptions = ({
     searchQuery,
     license,
     language,
+    numOfRating,
+    avgRating,
     setSearchText,
   ]);
 
@@ -363,8 +389,17 @@ export const RepoAttributeSearchOptions = ({
         <Row style={{ backgroundColor: "rgba(248, 244, 242, 0.952)" }}>
           <Col lg={3}>
             <Form.Group className="mt-3" controlId="formHorizontal-3">
-              <Form.Label>forks</Form.Label>
-
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip id="button-tooltip-forks">GitHub-related</Tooltip>
+                }
+              >
+                <Form.Label>
+                  forks
+                  <AiFillQuestionCircle />
+                </Form.Label>
+              </OverlayTrigger>
               <Form.Control
                 name="forksAttribute"
                 type="text"
@@ -377,8 +412,16 @@ export const RepoAttributeSearchOptions = ({
 
           <Col lg={3}>
             <Form.Group className="mt-3" controlId="formHorizontal-4">
-              <Form.Label> watchers</Form.Label>
-
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip id="button-tooltip-watchers">GitHub-related</Tooltip>
+                }
+              >
+                <Form.Label>
+                  watchers <AiFillQuestionCircle />
+                </Form.Label>
+              </OverlayTrigger>
               <Form.Control
                 name="watchersAttribute"
                 type="text"
@@ -391,8 +434,17 @@ export const RepoAttributeSearchOptions = ({
 
           <Col lg={3}>
             <Form.Group className="mt-3" controlId="formHorizontal-1">
-              <Form.Label>stars</Form.Label>
-
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip id="button-tooltip-Stars">GitHub-related</Tooltip>
+                }
+              >
+                <Form.Label>
+                  stars
+                  <AiFillQuestionCircle />
+                </Form.Label>
+              </OverlayTrigger>
               <Form.Control
                 name="starsAttribute"
                 type="text"
@@ -496,6 +548,56 @@ export const RepoAttributeSearchOptions = ({
                 onChange={handleAttributeChange}
                 allowSelectAll={true}
                 defaultValue={language}
+              />
+            </Form.Group>
+          </Col>
+
+          <Col lg={3}>
+            <Form.Group className="mt-3" controlId="formHorizontal-ratings">
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip id="button-tooltip-numRating">
+                    MATLAB Central-related
+                  </Tooltip>
+                }
+              >
+                <Form.Label>
+                  number of ratings
+                  <AiFillQuestionCircle />
+                </Form.Label>
+              </OverlayTrigger>
+              <Form.Control
+                name="numRatingAttribute"
+                type="text"
+                value={numOfRating}
+                placeholder=">5,10..25 (See Help)"
+                onChange={handleAttributeChange}
+              />
+            </Form.Group>
+          </Col>
+
+          <Col lg={3}>
+            <Form.Group className="mt-3" controlId="formHorizontal-avgratings">
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip id="button-tooltip-avgrating">
+                    MATLAB Central-related
+                  </Tooltip>
+                }
+              >
+                <Form.Label>
+                  average ratings
+                  <AiFillQuestionCircle />
+                </Form.Label>
+              </OverlayTrigger>
+              <Form.Control
+                name="avgRatingAttribute"
+                type="text"
+                value={avgRating}
+                placeholder="1..5, <4 (See Help)"
+                onChange={handleAttributeChange}
               />
             </Form.Group>
           </Col>

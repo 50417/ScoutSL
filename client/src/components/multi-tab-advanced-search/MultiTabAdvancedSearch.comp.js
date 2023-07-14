@@ -26,6 +26,7 @@ export const MultiTabAdvancedSearch = ({
         defaultActiveKey="profile"
         id="fill-tab-example"
         className="mb-3"
+        unmountOnExit
         fill
       >
         <Tab eventKey="metricSearch" title="Simulink model">
