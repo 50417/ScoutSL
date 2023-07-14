@@ -192,7 +192,7 @@ export const ModelMetricOptions = ({
                 name="blockAttribute"
                 type="text"
                 value={blocks}
-                placeholder="0..100,200,>1000"
+                placeholder="0..100,200,>1000 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -216,7 +216,7 @@ export const ModelMetricOptions = ({
                 name="lineAttribute"
                 type="text"
                 value={lines}
-                placeholder="0..100,200,>1000"
+                placeholder="0..100,200,>1000 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -229,7 +229,7 @@ export const ModelMetricOptions = ({
                 name="subsystemsAttribute"
                 type="text"
                 value={subsystems}
-                placeholder="0..100,200,>1000"
+                placeholder="0..100,200,>1000 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -238,7 +238,7 @@ export const ModelMetricOptions = ({
           <Col lg={3}>
             <Form.Group className="mt-3" controlId="formmaxDepthAttribute-1">
               <OverlayTrigger
-                placement="right"
+                placement="top"
                 overlay={
                   <Tooltip id="button-tooltip-2">
                     maximum subsystem hierarchy depth
@@ -254,7 +254,7 @@ export const ModelMetricOptions = ({
                 name="maxDepthAttribute"
                 type="text"
                 value={maxDepth}
-                placeholder="0..10,4,<12"
+                placeholder="0..10,4,<8 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -267,11 +267,11 @@ export const ModelMetricOptions = ({
               controlId="formblockTypeAttribute-1"
             >
               <OverlayTrigger
-                placement="left"
+                placement="top"
                 overlay={
                   <Tooltip id="button-tooltip-2">
-                    Hold Ctrl to deselect/multiselect . <br></br>Block category.
-                    Refer to paper
+                    Search/Select block category.
+                    Refer to paper for full list.
                   </Tooltip>
                 }
               >
@@ -335,7 +335,7 @@ export const ModelMetricOptions = ({
           <Col lg={3}>
             <Form.Group className="mt-3" controlId="formcodeGenAttribute-1">
               <OverlayTrigger
-                placement="right"
+                placement="top"
                 overlay={
                   <Tooltip id="button-tooltip-2">
                     Simulink block configured to generate native code. Refer to

@@ -35,14 +35,14 @@ export const MultiTabAdvancedSearch = ({
             numbers_re={numbers_re}
           />
         </Tab>
-        <Tab eventKey="commitSearch" title="Simulink GitHub repository">
+        <Tab eventKey="commitSearch" title="Version controlled repository">
           <ProjectCommitSearchOptions
             setSearchText={setSearchText}
             handleOnSubmit={handleOnSubmit}
             numbers_re={numbers_re}
           />
         </Tab>
-        <Tab eventKey="repoSearch" title="Simulink project">
+        <Tab eventKey="repoSearch" title="GitHub/MATLAB Central project">
           <RepoAttributeSearchOptions
             setSearchText={setSearchText}
             handleOnSubmit={handleOnSubmit}

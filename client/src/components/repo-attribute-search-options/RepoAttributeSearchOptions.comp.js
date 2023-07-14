@@ -369,7 +369,7 @@ export const RepoAttributeSearchOptions = ({
                 name="forksAttribute"
                 type="text"
                 value={forks}
-                placeholder="0..100,200,>1000"
+                placeholder="0..10,>5,<10 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -383,7 +383,7 @@ export const RepoAttributeSearchOptions = ({
                 name="watchersAttribute"
                 type="text"
                 value={watchers}
-                placeholder="0..100,200,>1000"
+                placeholder="10..25,5,>10 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -397,7 +397,7 @@ export const RepoAttributeSearchOptions = ({
                 name="starsAttribute"
                 type="text"
                 value={stars}
-                placeholder="0..100,200,>1000"
+                placeholder=">50,10..25 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -411,7 +411,7 @@ export const RepoAttributeSearchOptions = ({
                 name="createdDateAttribute"
                 type="text"
                 value={createdDate}
-                placeholder=" <YYYY-MM-DD, YYYY-MM-DD..YYYY-MM-DD"
+                placeholder=" <YYYY-MM-DD (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -427,7 +427,7 @@ export const RepoAttributeSearchOptions = ({
                 name="pushedAttribute"
                 type="text"
                 value={pushedDate}
-                placeholder=" >YYYY-MM-DD, YYYY-MM-DD..YYYY-MM-DD"
+                placeholder=">YYYY-MM-DD (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -441,7 +441,7 @@ export const RepoAttributeSearchOptions = ({
                 name="numSimModelAttribute"
                 type="text"
                 value={numSimModel}
-                placeholder="0..100,200,>1000"
+                placeholder="0..50,>100 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>

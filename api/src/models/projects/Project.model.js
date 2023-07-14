@@ -41,11 +41,16 @@ const getProjectById = (project_id) => {
 };
 
 const getProjectBySearchText = (searchText) => {
+  var queryObj = [];
+  attr_text = ['project_description']
+  for (attr of attr_text) {
+    var tmp ={}
+    tmp[attr] = { $regex: searchText, $options: "i" }
+    queryObj.push(tmp)
+  }
   return new Promise((resolve, reject) => {
     try {
-      ProjectSchema.find({
-        project_description: { $regex: searchText, $options: "i" },
-      })
+      ProjectSchema.find({'$or':queryObj})
         .select(
           "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
         )

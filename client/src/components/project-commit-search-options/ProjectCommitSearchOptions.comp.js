@@ -119,7 +119,7 @@ export const ProjectCommitSearchOptions = ({
       >
         <Form.Group as={Row} className="mb-5" controlId="formHorizontal-1">
           <Form.Label column sm={2}>
-            GitHub repo with
+            VC Repo with
           </Form.Label>
           <Col sm={8}>
             <Form.Control
@@ -146,7 +146,7 @@ export const ProjectCommitSearchOptions = ({
                 name="issueAttribute"
                 type="text"
                 value={issue}
-                placeholder="0..100,200,>1000"
+                placeholder="25..50,10,>100 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -159,7 +159,7 @@ export const ProjectCommitSearchOptions = ({
                 name="prAttribute"
                 type="text"
                 value={pr}
-                placeholder="0..100,200,>1000"
+                placeholder="10..50,10,>25 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -171,7 +171,7 @@ export const ProjectCommitSearchOptions = ({
                 name="commitAttribute"
                 type="text"
                 value={commit}
-                placeholder="0..100,200,>1000"
+                placeholder="0..100,200,>1000 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -184,7 +184,7 @@ export const ProjectCommitSearchOptions = ({
                 name="contributorAttribute"
                 type="text"
                 value={contributor}
-                placeholder="0..100,200,>1000"
+                placeholder="0..5,>3 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -213,7 +213,7 @@ export const ProjectCommitSearchOptions = ({
                 name="modelCommitAttribute"
                 type="text"
                 value={modelCommit}
-                placeholder="0..100,200,>1000"
+                placeholder="0..10, <20 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -243,7 +243,7 @@ export const ProjectCommitSearchOptions = ({
                 name="modelcontributorAttribute"
                 type="text"
                 value={modelcontributor}
-                placeholder="0..100,200,>1000"
+                placeholder="0..5,>2 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -258,7 +258,7 @@ export const ProjectCommitSearchOptions = ({
                 placement="top"
                 overlay={
                   <Tooltip id="button-tooltip-2">
-                    Number of commits/changes on the model file
+                    Number of commits on the model file
                   </Tooltip>
                 }
               >
@@ -272,7 +272,7 @@ export const ProjectCommitSearchOptions = ({
                 name="modelRevisionAttribute"
                 type="text"
                 value={modelRevision}
-                placeholder="0..100,200,>1000"
+                placeholder="0..20,>5 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
@@ -284,7 +284,7 @@ export const ProjectCommitSearchOptions = ({
               controlId="formperModelcontributor-8"
             >
               <OverlayTrigger
-                placement="right"
+                placement="top"
                 overlay={
                   <Tooltip id="button-tooltip-2">
                     Number of contributors working on the model file
@@ -301,7 +301,7 @@ export const ProjectCommitSearchOptions = ({
                 name="perModelContributorAttribute"
                 type="text"
                 value={perModelContributor}
-                placeholder="0..100,200,>1000"
+                placeholder="0..5,>2 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>
