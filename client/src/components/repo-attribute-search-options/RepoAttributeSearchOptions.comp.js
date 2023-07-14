@@ -36,6 +36,7 @@ export const RepoAttributeSearchOptions = ({
 
   const [numOfRating, setNumOfRating] = useState("");
   const [avgRating, setAvgRating] = useState("");
+  const [numOfComments, setNumOfComments] = useState("");
 
   const [advancedSearchText, setAdvancedSearchText] = useState("");
 
@@ -260,6 +261,11 @@ export const RepoAttributeSearchOptions = ({
       attributeType = e.target.name;
     }
     switch (attributeType) {
+      case "numOfCommentsAttribute":
+        if (numbers_re.test(value)) {
+          setNumOfComments(value);
+        }
+        break;
       case "avgRatingAttribute":
         if (numbers_re.test(value)) {
           setAvgRating(value);
@@ -332,7 +338,8 @@ export const RepoAttributeSearchOptions = ({
       (owners.trim() !== "" ? " owners:" + owners : "") +
       (searchQuery.trim() !== "" ? " searchQuery:" + searchQuery : "") +
       (numOfRating.trim() !== "" ? " numOfRating:" + numOfRating : "") +
-      (avgRating.trim() !== "" ? " setAvgRating:" + avgRating : "");
+      (avgRating.trim() !== "" ? " avgRating:" + avgRating : "") +
+      (numOfComments.trim() !== "" ? " numOfComments:" + numOfComments : "");
     if (license.length > 0 && license[0] !== "") {
       tmpAdvancedSearchText =
         tmpAdvancedSearchText + " license:" + license.join(",");
@@ -357,6 +364,7 @@ export const RepoAttributeSearchOptions = ({
     language,
     numOfRating,
     avgRating,
+    numOfComments,
     setSearchText,
   ]);
 
@@ -597,6 +605,31 @@ export const RepoAttributeSearchOptions = ({
                 type="text"
                 value={avgRating}
                 placeholder="1..5, <4 (See Help)"
+                onChange={handleAttributeChange}
+              />
+            </Form.Group>
+          </Col>
+
+          <Col lg={3}>
+            <Form.Group className="mt-3" controlId="formHorizontal-noOfComment">
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip id="button-tooltip-noOfComment">
+                    MATLAB Central-related
+                  </Tooltip>
+                }
+              >
+                <Form.Label>
+                  number of comments
+                  <AiFillQuestionCircle />
+                </Form.Label>
+              </OverlayTrigger>
+              <Form.Control
+                name="numOfCommentsAttribute"
+                type="text"
+                value={numOfComments}
+                placeholder=">10 (See Help)"
                 onChange={handleAttributeChange}
               />
             </Form.Group>

@@ -19,9 +19,7 @@ export const SearchResult = ({ fetchedSearchQuery }) => {
   if (error) {
     //console.log(error);
     return (
-      <Alert>
-        Oops! Something went wrong with your input. Check Help and try again
-      </Alert>
+      <Alert>Oops! Something went wrong. Check Help! Try reloading.</Alert>
     );
   }
   if (queryResults !== undefined && queryResults.length === 0)

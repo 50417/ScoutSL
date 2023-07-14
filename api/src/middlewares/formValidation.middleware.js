@@ -48,6 +48,9 @@ const numeric_types = new Set([
   "watchers",
   "stars",
   "numSimModel",
+  "avgRating",
+  "numOfComments",
+  "numOfRating",
 ]);
 
 const queryModelMetricValidation = (req, res, next) => {
@@ -152,6 +155,15 @@ const watchersoptional = Joi.string().allow("");
 const stars = Joi.number().min(0);
 const starsoptional = Joi.string().allow("");
 
+const avgRating = Joi.number().min(0);
+const avgRatingoptional = Joi.string().allow("");
+
+const numOfComments = Joi.number().min(0);
+const numOfCommentsoptional = Joi.string().allow("");
+
+const numOfRating = Joi.number().min(0);
+const numOfRatingoptional = Joi.string().allow("");
+
 const numSimModel = Joi.number().min(0);
 const numSimModeloptional = Joi.string().allow("");
 
@@ -162,6 +174,12 @@ const language = Joi.array().items(Joi.string());
 
 const queryRepoAttributeValidation = (req, res, next) => {
   const schema = Joi.object({
+    avgRating,
+    avgRatingoptional,
+    numOfComments,
+    numOfCommentsoptional,
+    numOfRating,
+    numOfRatingoptional,
     forks,
     forksoptional,
     watchers,

@@ -26,6 +26,7 @@ const searchResultSlice = createSlice({
       }
 
       state.isLoading = false;
+      state.error = "";
     },
     fetchResultFail: (state, { payload }) => {
       state.isLoading = false;

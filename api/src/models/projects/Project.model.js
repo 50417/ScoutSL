@@ -25,6 +25,9 @@ const req_to_col_map = {
   codeGen: "models.code_gen",
   modelRevision: "models.commits",
   perModelContributor: "models.contributors",
+  numOfRating: "no_of_ratings",
+  avgRating: "average_rating",
+  numOfComments: "no_of_comments",
 };
 const result_limit = 100000;
 const getProjectById = (project_id) => {
@@ -42,15 +45,15 @@ const getProjectById = (project_id) => {
 
 const getProjectBySearchText = (searchText) => {
   var queryObj = [];
-  attr_text = ['project_description']
+  attr_text = ["project_description"];
   for (attr of attr_text) {
-    var tmp ={}
-    tmp[attr] = { $regex: searchText, $options: "i" }
-    queryObj.push(tmp)
+    var tmp = {};
+    tmp[attr] = { $regex: searchText, $options: "i" };
+    queryObj.push(tmp);
   }
   return new Promise((resolve, reject) => {
     try {
-      ProjectSchema.find({'$or':queryObj})
+      ProjectSchema.find({ $or: queryObj })
         .select(
           "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
         )

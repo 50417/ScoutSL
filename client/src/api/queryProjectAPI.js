@@ -42,7 +42,7 @@ export const getProjectsCommitMetric = (advancedSearchText) => {
 
 export const getProjectsRepoAttribute = (advancedSearchText) => {
   const params = processSearchText(advancedSearchText);
-  console.log(params);
+  //console.log(params);
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(API_URL + "/v1/project/repoattribute", {
