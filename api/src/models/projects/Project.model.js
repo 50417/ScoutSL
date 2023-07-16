@@ -68,15 +68,15 @@ const getProjectBySearchText = (searchText) => {
 
 const get_num_range_query = (param, opt_param) => {
   if (opt_param === "") {
-    return param;
+    return Number(param);
   } else if (!isNaN(Number(opt_param))) {
-    return { $gt: param, $lt: Number(opt_param) };
+    return { $gt: Number(param), $lt: Number(opt_param) };
   } else if (!isNaN(Date.parse(opt_param))) {
     return { $gte: new Date(param), $lte: new Date(opt_param) };
   } else if (opt_param === ">" && !isNaN(Number(param))) {
-    return { $gt: param };
+    return { $gt: Number(param) };
   } else if (opt_param === ">" && !isNaN(Date.parse(param))) {
-    return { $gt: param };
+    return { $gt: Number(param) };
   } else if (opt_param === "<" && !isNaN(Number(param))) {
     return { $lt: Number(param) };
   } else if (opt_param === "<" && !isNaN(Date.parse(param))) {
@@ -165,36 +165,82 @@ const getProjectByCommitMetric = (searchFilterObj) => {
   });
 };
 
+const github_only = ["forks_count", "watchers_count", "stargazers_count"];
+const matc_only = ["no_of_ratings", "average_rating", "no_of_comments"];
 const getProjectByRepoAttribute = (searchFilterObj) => {
   queryObj = {};
+  matcQueryObj = {};
+  githubQueryObj = {};
 
   const req_keys = Object.keys(searchFilterObj);
   const req_to_col_keys = Object.keys(req_to_col_map);
 
   for (let i = 0; i < req_keys.length; i++) {
-    req_key = req_keys[i];
+    var req_key = req_keys[i];
 
     if (req_to_col_keys.includes(req_key)) {
       if (req_keys.includes(req_key + "optional")) {
-        queryObj[req_to_col_map[req_key]] = get_num_range_query(
-          searchFilterObj[req_key],
-          searchFilterObj[req_key + "optional"]
-        );
+        if (github_only.includes(req_to_col_map[req_key])) {
+          githubQueryObj[req_to_col_map[req_key]] = get_num_range_query(
+            searchFilterObj[req_key],
+            searchFilterObj[req_key + "optional"]
+          );
+        } else if (matc_only.includes(req_to_col_map[req_key])) {
+          matcQueryObj[req_to_col_map[req_key]] = get_num_range_query(
+            searchFilterObj[req_key],
+            searchFilterObj[req_key + "optional"]
+          );
+        } else {
+          queryObj[req_to_col_map[req_key]] = get_num_range_query(
+            searchFilterObj[req_key],
+            searchFilterObj[req_key + "optional"]
+          );
+        }
       } else if (Array.isArray(searchFilterObj[req_key])) {
         //for(const arr_itm of queryObj[req_to_col_map[req_key]]){
         queryObj[req_to_col_map[req_key]] = { $all: searchFilterObj[req_key] };
         //}
       } else {
-        queryObj[req_to_col_map[req_key]] = {
-          $regex: searchFilterObj[req_key],
-          $options: "i",
-        };
+        if (github_only.includes(req_to_col_map[req_key])) {
+          githubQueryObj[req_to_col_map[req_key]] = {
+            $regex: searchFilterObj[req_key],
+            $options: "i",
+          };
+        } else if (matc_only.includes(req_to_col_map[req_key])) {
+          matcQueryObj[req_to_col_map[req_key]] = {
+            $regex: searchFilterObj[req_key],
+            $options: "i",
+          };
+        } else {
+          queryObj[req_to_col_map[req_key]] = {
+            $regex: searchFilterObj[req_key],
+            $options: "i",
+          };
+        }
       }
     }
   }
+  for (const [key, value] of Object.entries(queryObj)) {
+    if (Object.keys(githubQueryObj).length !== 0) {
+      githubQueryObj[key] = value;
+    }
+    if (Object.keys(matcQueryObj).length !== 0) {
+      matcQueryObj[key] = value;
+    }
+  }
+  var query_to_search;
+  if (Object.keys(githubQueryObj).length === 0) {
+    query_to_search = [matcQueryObj];
+  } else if (Object.keys(matcQueryObj).length === 0) {
+    query_to_search = [githubQueryObj];
+  } else {
+    query_to_search = [githubQueryObj, matcQueryObj];
+  }
+
+  console.log(query_to_search);
   return new Promise((resolve, reject) => {
     try {
-      ProjectSchema.find(queryObj)
+      ProjectSchema.find({ $or: query_to_search })
         .select(
           "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
         )
