@@ -22,7 +22,7 @@ export const SearchForm = () => {
               name="searchStr"
               className="form-control-settings"
               onChange={handleOnChange}
-              placeholder="Search results"
+              placeholder="Search in results"
             />
           </Col>
         </Form.Group>

@@ -37,14 +37,7 @@ export const SearchResult = ({ fetchedSearchQuery }) => {
             <Col style={{ display: "flex", justifyContent: "left" }} md={2}>
               {queryResults.length + " "} results
             </Col>
-            <Col
-              style={{ justifyContent: "center" }}
-              className="text-truncate"
-              md={8}
-            >
-              Search Query: {fetchedSearchQuery}
-            </Col>
-            <Col style={{ display: "flex", justifyContent: "right" }} md={2}>
+            <Col style={{ justifyContent: "center" }} md={10}>
               <SearchForm />
             </Col>
             <SearchResultTable />
