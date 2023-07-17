@@ -4,7 +4,8 @@ import { ModelMetricOptions } from "../model-metric-search-options/ModelMetricOp
 import { ProjectCommitSearchOptions } from "../project-commit-search-options/ProjectCommitSearchOptions.comp";
 import { RepoAttributeSearchOptions } from "../repo-attribute-search-options/RepoAttributeSearchOptions.comp";
 import PropTypes from "prop-types";
-
+import { useDispatch } from "react-redux";
+import { resetSearchResult } from "../../pages/search-result/searchResultAction";
 export const MultiTabAdvancedSearch = ({
   searchPageSwitcher,
   setSearchText,
@@ -12,6 +13,10 @@ export const MultiTabAdvancedSearch = ({
   numbers_re,
   date_re,
 }) => {
+  const dispatch = useDispatch();
+  const onChange = () => {
+    dispatch(resetSearchResult());
+  };
   return (
     <Container>
       <Row>
@@ -28,6 +33,7 @@ export const MultiTabAdvancedSearch = ({
         className="mb-3"
         unmountOnExit
         fill
+        onSelect={onChange}
       >
         <Tab eventKey="metricSearch" title="Simulink model">
           <ModelMetricOptions

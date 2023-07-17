@@ -228,8 +228,15 @@ const getProjectByRepoAttribute = (searchFilterObj) => {
       matcQueryObj[key] = value;
     }
   }
+
   var query_to_search;
-  if (Object.keys(githubQueryObj).length === 0) {
+  if (
+    Object.keys(matcQueryObj).length === 0 &&
+    Object.keys(githubQueryObj).length === 0
+  ) {
+    console.log("asdas ");
+    query_to_search = [queryObj];
+  } else if (Object.keys(githubQueryObj).length === 0) {
     query_to_search = [matcQueryObj];
   } else if (Object.keys(matcQueryObj).length === 0) {
     query_to_search = [githubQueryObj];

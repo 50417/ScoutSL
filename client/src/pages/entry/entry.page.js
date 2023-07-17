@@ -4,7 +4,10 @@ import "./entry.style.css";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { useDispatch } from "react-redux";
-import { fetchSearchResult } from "../search-result/searchResultAction";
+import {
+  fetchSearchResult,
+  resetSearchResult,
+} from "../search-result/searchResultAction";
 import { SearchResult } from "../search-result/SearchResult.page";
 import { MultiTabAdvancedSearch } from "../../components/multi-tab-advanced-search/MultiTabAdvancedSearch.comp";
 
@@ -40,6 +43,7 @@ export const Entry = () => {
     setSearchPageLoad(searchPageType);
     //if (searchPageType === "basic") {
     setSearchText("");
+    dispatch(resetSearchResult());
     //setFetchedSearchQuery("");
     //}
   };

@@ -49,6 +49,12 @@ const searchResultSlice = createSlice({
         return false;
       });
     },
+    resetState: (state) => {
+      state.queryResults = undefined;
+      state.isLoading = false;
+      state.error = "";
+      state.searchInQueryResults = [];
+    },
   },
 });
 
@@ -58,5 +64,6 @@ export const {
   fetchResultSuccess,
   fetchResultLoading,
   searchQueryResults,
+  resetState,
 } = actions;
 export default reducer;

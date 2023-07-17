@@ -9,6 +9,7 @@ import {
   fetchResultSuccess,
   fetchResultLoading,
   searchQueryResults,
+  resetState,
 } from "./searchResultSlice";
 export const fetchSearchResult =
   (searchText, searchPageType) => async (dispatch) => {
@@ -33,4 +34,8 @@ export const fetchSearchResult =
 
 export const filterSearchResult = (str) => (dispatch) => {
   dispatch(searchQueryResults(str));
+};
+
+export const resetSearchResult = () => (dispatch) => {
+  dispatch(resetState());
 };
