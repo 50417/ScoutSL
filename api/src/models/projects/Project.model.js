@@ -55,7 +55,7 @@ const getProjectBySearchText = (searchText) => {
     try {
       ProjectSchema.find({ $or: queryObj })
         .select(
-          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
+          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha score"
         )
         .limit(result_limit)
         .then((data) => resolve(data))
@@ -122,7 +122,7 @@ const getProjectByModelMetric = (searchFilterObj) => {
     try {
       ProjectSchema.find(queryObj)
         .select(
-          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
+          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha score"
         )
         .limit(result_limit)
         .then((data) => resolve(data))
@@ -154,7 +154,7 @@ const getProjectByCommitMetric = (searchFilterObj) => {
     try {
       ProjectSchema.find(queryObj)
         .select(
-          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
+          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha score"
         )
         .limit(result_limit)
         .then((data) => resolve(data))
@@ -242,7 +242,7 @@ const getProjectByRepoAttribute = (searchFilterObj) => {
     try {
       ProjectSchema.find({ $or: query_to_search })
         .select(
-          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha"
+          "project_url download_link project_name project_description updated_at license no_of_model_files project_id _id version_sha score"
         )
         .limit(result_limit)
         .then((data) => resolve(data))
