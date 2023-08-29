@@ -17,6 +17,10 @@ export const Header = () => {
 
   const bibtex =
     "@inproceedings{XX,\nauthor    = {XX}, \ntitle     = {XX},\nbooktitle = {XX},\npages     = {XX},\npublisher = {{XX}},\nyear      = {XX}}";
+  const getFeedback = () => {
+    const feedback_url = "https://forms.gle/JUyRSc2J9Ui715WT9";
+    window.open(feedback_url, "_blank");
+  };
   return (
     <Container>
       <Row>
@@ -112,6 +116,14 @@ export const Header = () => {
         </Col>
 
         <Col style={{ display: "flex", justifyContent: "right" }}>
+          <Button
+            name="button-getFeedback"
+            variant="light"
+            onClick={() => getFeedback()}
+            className="getFeedbackdButton"
+          >
+            Got Feedback?
+          </Button>
           <Button variant="light" onClick={handleShowCitation}>
             Cite as
           </Button>
