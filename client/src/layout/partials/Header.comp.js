@@ -15,8 +15,17 @@ export const Header = () => {
   const handleCloseHelp = () => setShowHelp(false);
   const handleShowHelp = () => setShowHelp(true);
 
-  const bibtex =
-    "@inproceedings{XX,\nauthor    = {XX}, \ntitle     = {XX},\nbooktitle = {XX},\npages     = {XX},\npublisher = {{XX}},\nyear      = {XX}}";
+  const bibtex = "@inproceedings{Shrestha23ScoutSL,";
+  const bibtex_1 =
+    "  author = {Sohil Lal Shrestha and Alexander Boll and Timo Kehrer and Christoph Csallner},";
+  const bibtex_2 =
+    "title = {{ScoutSL}: An Open-Source Simulink Search Engine},";
+  const bibtex_3 =
+    " booktitle = 2023 ACM/IEEE International Conference on Model Driven Engineering Languages and Systems Companion ({MODELS-C}),";
+  const bibtex_4 = "  year = {2023},";
+  const bibtex_5 = "  pages = {70--74},";
+  const bibtex_6 = "  publisher = {IEEE},";
+  const bibtex_7 = "}  ";
   const getFeedback = () => {
     const feedback_url = "https://forms.gle/JUyRSc2J9Ui715WT9";
     window.open(feedback_url, "_blank");
@@ -131,7 +140,26 @@ export const Header = () => {
             <Modal.Header closeButton>
               <Modal.Title>Cite as</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{bibtex}</Modal.Body>
+            <Modal.Body>
+              <div>
+                {bibtex}
+                <br></br>
+                &nbsp; &nbsp;{bibtex_1}
+                <br></br>
+                &nbsp; &nbsp;{bibtex_2}
+                <br></br>
+                &nbsp; &nbsp;{bibtex_3}
+                <br></br>
+                &nbsp; &nbsp;{bibtex_4}
+                <br></br>
+                &nbsp; &nbsp;{bibtex_5}
+                <br></br>
+                &nbsp; &nbsp;{bibtex_6}
+                <br></br>
+                &nbsp; &nbsp;{bibtex_7}
+                <br></br>
+              </div>
+            </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseCitation}>
                 Close
