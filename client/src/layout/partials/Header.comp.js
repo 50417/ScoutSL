@@ -21,7 +21,7 @@ export const Header = () => {
   const bibtex_2 =
     "title = {{ScoutSL}: An Open-Source Simulink Search Engine},";
   const bibtex_3 =
-    " booktitle = 2023 ACM/IEEE International Conference on Model Driven Engineering Languages and Systems Companion ({MODELS-C}),";
+    " booktitle = {2023 ACM/IEEE International Conference on Model Driven Engineering Languages and Systems Companion ({MODELS-C})},";
   const bibtex_4 = "  year = {2023},";
   const bibtex_5 = "  pages = {70--74},";
   const bibtex_6 = "  publisher = {IEEE},";
