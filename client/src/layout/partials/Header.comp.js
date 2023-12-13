@@ -60,9 +60,6 @@ export const Header = () => {
               <Button variant="secondary" onClick={handleCloseAbout}>
                 Close
               </Button>
-              <Button variant="primary" onClick={handleCloseHelp}>
-                Copy
-              </Button>
             </Modal.Footer>
           </Modal>
 
@@ -260,7 +257,21 @@ export const Header = () => {
               <Button variant="secondary" onClick={handleCloseCitation}>
                 Close
               </Button>
-              <Button variant="primary" onClick={handleCloseCitation}>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    bibtex +
+                      bibtex_1 +
+                      bibtex_2 +
+                      bibtex_3 +
+                      bibtex_4 +
+                      bibtex_5 +
+                      bibtex_6 +
+                      bibtex_7
+                  );
+                }}
+              >
                 Copy
               </Button>
             </Modal.Footer>
