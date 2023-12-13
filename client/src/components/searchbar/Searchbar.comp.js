@@ -43,11 +43,13 @@ export const Searchbar = ({
       </Row>
       <Row>
         <Col>
-          Use{" "}
-          <a href="#!" onClick={() => searchPageSwitcher("advanced")}>
-            Advanced Search
-          </a>{" "}
-          to search for Simulink projects specific to your needs
+          <h5>
+            Use{" "}
+            <a href="#!" onClick={() => searchPageSwitcher("advanced")}>
+              Advanced Search
+            </a>{" "}
+            to search for Simulink projects specific to your needs
+          </h5>
         </Col>
       </Row>
     </Container>

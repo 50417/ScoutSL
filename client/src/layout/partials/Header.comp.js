@@ -4,6 +4,7 @@ import "./header.style.css";
 export const Header = () => {
   const [showCitation, setShowCitation] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [showREADME, setShowREADME] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
   const handleCloseCitation = () => setShowCitation(false);
@@ -11,6 +12,9 @@ export const Header = () => {
 
   const handleCloseAbout = () => setShowAbout(false);
   const handleShowAbout = () => setShowAbout(true);
+
+  const handleCloseREADME = () => setShowREADME(false);
+  const handleShowREADME = () => setShowREADME(true);
 
   const handleCloseHelp = () => setShowHelp(false);
   const handleShowHelp = () => setShowHelp(true);
@@ -30,6 +34,10 @@ export const Header = () => {
     const feedback_url = "https://forms.gle/JUyRSc2J9Ui715WT9";
     window.open(feedback_url, "_blank");
   };
+  const goToVideo = () => {
+    const video_url = "https://youtu.be/HwsHL8LrVCM";
+    window.open(video_url, "_blank");
+  };
   return (
     <Container>
       <Row>
@@ -47,6 +55,7 @@ export const Header = () => {
               Texas at Arlington and Software Engineering Group, University of
               Bern
             </Modal.Body>
+
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseAbout}>
                 Close
@@ -56,6 +65,93 @@ export const Header = () => {
               </Button>
             </Modal.Footer>
           </Modal>
+
+          <Button variant="light" onClick={handleShowREADME}>
+            README
+          </Button>
+
+          <Modal size="lg" show={showREADME} onHide={handleCloseREADME}>
+            <Modal.Header closeButton>
+              <Modal.Title>README</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>Dear Simulink-Enthusiast! </p>
+              <p>
+                ScoutSL is a search engine for Simulink models and Simulink
+                projects fitting your criteria. We think this can be useful, if
+                you need Simulink models for your:
+              </p>
+              <ol>
+                1. research
+                <ol>a. to study Simulink modeling practice </ol>
+                <ol>b. as experimental subjects for your empirical research</ol>
+              </ol>
+              <ol>2. teaching, e.g. to show concrete examples</ol>{" "}
+              <ol>
+                3. hobby, e.g. pre-made controls for your quadro-copter drone or
+                LEGO robot
+              </ol>
+              <h2> Usage</h2> <h4> Keyword search </h4>
+              <p>
+                With the keyword search, you can find Simulink models or
+                Simulink projects by topic. In the starting screen, you can
+                input your keyword search like in any other search engine. After
+                entering your keyword, ScoutSL presents a result list for your
+                query. In each result's top row, the result homepage is linked
+                in the top left, followed by a short description. The bottom row
+                shows the license type, last update time, how many models are
+                part of the project, a direct download link, and JSON-metadata
+                of the project.
+              </p>
+              <p>
+                You can combine different keywords, some keyword suggestions
+                are: automotive, pacemaker, drone, wind turbine, solar power,
+                pendulum.
+              </p>
+              <h4> Advanced Search </h4>
+              <p>
+                You can also click on "Advanced Search" to access the three
+                advanced search modes. With the advanced search modes, you can
+                find Simulink models or Simulink projects by model or project
+                metrics or metadata.
+              </p>
+              <h5> Simulink model</h5>
+              <p>
+                Here, you can find Simulink models according to your needs, e.g.
+                of a certain size or with a certain block set. Some suggestions
+                are: &gt;10000 blocks, solver with variable-step, with code
+                generation
+              </p>
+              <h5> Version controlled repository</h5>{" "}
+              <p>
+                Here, you can find Simulink projects according to your needs,
+                e.g. of a certain number of commits, and contributors.{" "}
+              </p>{" "}
+              <p>
+                Some suggestions are: &gt;100000 commits, &gt;100 contributors{" "}
+              </p>{" "}
+              <h5> GitHub/MATLAB Central project</h5>
+              <p>
+                Here, you can find Simulink projects according to your needs,
+                e.g. with a certain license type, created after a certain date,
+                etc.
+              </p>
+              <p> Some suggestions are: BSD 2 license, &gt; 4 stars</p>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseREADME}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          <Button
+            name="button-goToVideo"
+            variant="light"
+            onClick={() => goToVideo()}
+          >
+            Video Tutorial
+          </Button>
         </Col>
 
         <Col style={{ display: "flex", justifyContent: "center" }}>
